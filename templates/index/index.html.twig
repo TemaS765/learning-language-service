@@ -1,12 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container mt-5">
-        <div class="d-grid gap-2 col-6 mx-auto">
-            <button class="btn btn-primary p-3 text-uppercase" type="button">Обучение</button>
-            <button class="btn btn-primary p-3 text-uppercase" type="button">Проверка</button>
-            <button class="btn btn-primary p-3 text-uppercase" type="button">Добавить слова</button>
-            <button class="btn btn-primary p-3 text-uppercase" type="button">Мои слова</button>
-        </div>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <a class="btn btn-primary p-3 text-uppercase" href="">Обучение</a>
+        <a class="btn btn-primary p-3 text-uppercase" href="">Проверка</a>
+        <a class="btn btn-primary p-3 text-uppercase" href="{{ url('add_word') }}">Добавить слова</a>
+        <a class="btn btn-primary p-3 text-uppercase" href="{{ url('get_words') }}">Мои слова</a>
     </div>
 {% endblock %}
