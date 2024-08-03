@@ -101,7 +101,7 @@ class ExecuteExaminationController extends AbstractController
                 );
                 $message = $res->isCorrect
                     ? 'Верно!'
-                    : "Не верно: <strong>{$res->exercise->getCorrectAnswer()->getValue()}</strong>.";
+                    : "Неверно: <strong>{$res->exercise->getCorrectAnswer()->getValue()}</strong>.";
                 $this->addFlash($res->isCorrect ? 'success' : 'danger', $message);
             } catch (NotFoundException $exception) {
                 return $this->redirectToRoute('train');
