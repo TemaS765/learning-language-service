@@ -32,7 +32,7 @@ readonly class CheckExerciseUseCase
         $update->isRight = $isCorrect;
         $this->exerciseRepository->updateExercise($exercise->getId(), $update);
 
-        return new CheckExerciseResponse($isCorrect);
+        return new CheckExerciseResponse($isCorrect, $exercise);
     }
 
 }
