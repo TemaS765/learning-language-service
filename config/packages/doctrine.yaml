@@ -8,6 +8,8 @@ doctrine:
 
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
+        types:
+            examination_type_enum: \App\Infrastructure\Doctrine\Type\ExaminationEnumType
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true
@@ -24,6 +26,10 @@ doctrine:
                 alias: App
         controller_resolver:
             auto_mapping: false
+        dql:
+            numeric_functions:
+                random: App\Infrastructure\Doctrine\Function\Random
+
 
 when@test:
     doctrine:

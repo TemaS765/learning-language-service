@@ -7,24 +7,24 @@ use App\Domain\Exception\NotFoundException;
 use App\Domain\ObjectValue\Id;
 use App\Domain\ObjectValue\Text;
 use App\Domain\Repository\WordRepositoryInterface;
-use App\Infrastructure\Entity\Word as WordEntity;
+use App\Infrastructure\Entity\Word as ORMEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Iterator;
 
 /**
- * @extends ServiceEntityRepository<Word>
+ * @extends ServiceEntityRepository<Word>type
  */
 class WordRepository extends ServiceEntityRepository implements WordRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, WordEntity::class);
+        parent::__construct($registry, ORMEntity::class);
     }
 
     public function addWord(Word $word): void
     {
-        $entity = new WordEntity();
+        $entity = new ORMEntity();
         $entity->setText($word->getText()->getValue());
         $entity->setTranslate($word->getTranslate()->getValue());
 
@@ -34,7 +34,7 @@ class WordRepository extends ServiceEntityRepository implements WordRepositoryIn
 
     public function updateWordById(Id $id, Text $text, Text $translate): void
     {
-        /** @var WordEntity $entity */
+        /** @var ORMEntity $entity */
         $entity = $this->find($id->getValue());
         if ($entity === null) {
             throw new NotFoundException();
@@ -55,7 +55,7 @@ class WordRepository extends ServiceEntityRepository implements WordRepositoryIn
     public function deleteWord(Word $word): void
     {
         $word = $this->getWordById($word->getId());
-        $entity = new WordEntity();
+        $entity = new ORMEntity();
         $entity->setId($word->getId()->getValue());
         $this->getEntityManager()->remove($entity);
         $this->getEntityManager()->flush();
@@ -68,7 +68,7 @@ class WordRepository extends ServiceEntityRepository implements WordRepositoryIn
     {
         $entities = $this->findAll();
         $words = [];
-        /** @var WordEntity $entity */
+        /** @var ORMEntity $entity */
         foreach ($entities as $entity) {
             $word = new Word(new Text($entity->getText()), new Text($entity->getTranslate()));
             $reflectionProperty = new \ReflectionProperty(Word::class, 'id');
@@ -81,7 +81,7 @@ class WordRepository extends ServiceEntityRepository implements WordRepositoryIn
 
     public function getWordById(Id $id): Word
     {
-        /** @var WordEntity $entity */
+        /** @var ORMEntity $entity */
         $entity = $this->find($id->getValue());
         if ($entity === null) {
             throw new NotFoundException();
@@ -91,5 +91,26 @@ class WordRepository extends ServiceEntityRepository implements WordRepositoryIn
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($word, new Id($entity->getId()));
         return $word;
+    }
+
+    /**
+     * @return Iterator<Word>
+     */
+    public function getWordsForExamination(int $limit): Iterator
+    {
+        $db = $this->getEntityManager()->createQueryBuilder();
+        $db->select('w')
+            ->from(ORMEntity::class, 'w')
+            ->orderBy('RANDOM()')
+            ->setMaxResults($limit);
+
+        $entities = $db->getQuery()->getResult();
+        foreach ($entities as $entity) {
+            $word = new Word(new Text($entity->getText()), new Text($entity->getTranslate()));
+            $reflectionProperty = new \ReflectionProperty(Word::class, 'id');
+            $reflectionProperty->setAccessible(true);
+            $reflectionProperty->setValue($word, new Id($entity->getId()));
+            yield $word;
+        }
     }
 }

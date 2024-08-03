@@ -17,4 +17,6 @@ interface WordRepositoryInterface
     /** @return Iterator<Word> */
     public function getWords(): Iterator;
     public function getWordById(Id $id): Word;
+    /** @return Iterator<Word> */
+    public function getWordsForExamination(int $limit): Iterator;
 }
