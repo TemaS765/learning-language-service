@@ -23,7 +23,6 @@ final class AnswerCommandController extends TelegramCommand
     public function __invoke(Type\Message $message, string $arg1 = '', string $arg2 = ''): Method
     {
         $answer = explode(' ', $message->text, 2)[1] ?? '';
-        dump( explode(' ', $message->text, 2));
         if (empty($answer)) {
             return $this->reply("Передано пустое значение");
         }
