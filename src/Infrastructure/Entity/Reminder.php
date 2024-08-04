@@ -4,10 +4,12 @@ namespace App\Infrastructure\Entity;
 
 use App\Domain\Enum\ReminderChannelType;
 use App\Infrastructure\Repository\ReminderRepository;
+use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReminderRepository::class)]
+#[ORM\Table(name: 'reminders')]
 class Reminder
 {
     #[ORM\Id]
@@ -15,8 +17,8 @@ class Reminder
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private int $period = 0;
+    #[ORM\Column(name: 'repeat_period')]
+    private int $repeatPeriod = 0;
 
     #[ORM\Column(name: 'channel_type', type: 'reminder_channel_type_enum')]
     private ReminderChannelType $channelType = ReminderChannelType::TELEGRAM;
@@ -28,24 +30,46 @@ class Reminder
     private bool $isActive = false;
 
     #[ORM\Column(name: 'created_at', type: 'datetime')]
-    private ?DateTimeInterface $createdAt = null;
+    private DateTimeInterface $createdAt;
 
     #[ORM\Column(name: 'updated_at', type: 'datetime', nullable: true)]
-    private ?DateTimeInterface $updatedAt = null;
+    private DateTimeInterface $updatedAt;
+
+    #[ORM\Column(name: 'last_reminder_at', type: 'datetime', nullable: true)]
+    private DateTimeInterface $lastReminderAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTime();
+        $this->updatedAt = new DateTime();
+    }
+
+    #[ORM\PrePersist]
+    public function onPrePersist(): void
+    {
+        $this->createdAt = new DateTime();
+        $this->updatedAt = new DateTime();
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate(): void
+    {
+        $this->updatedAt = new DateTime();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPeriod(): int
+    public function getRepeatPeriod(): int
     {
-        return $this->period;
+        return $this->repeatPeriod;
     }
 
-    public function setPeriod(int $period): static
+    public function setRepeatPeriod(int $repeatPeriod): static
     {
-        $this->period = $period;
+        $this->repeatPeriod = $repeatPeriod;
 
         return $this;
     }
@@ -108,5 +132,17 @@ class Reminder
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    public function setLastReminderAt(?DateTimeInterface $lastReminderAt): static
+    {
+        $this->lastReminderAt = $lastReminderAt;
+
+        return $this;
+    }
+
+    public function getLastReminderAt(): ?DateTimeInterface
+    {
+        return $this->lastReminderAt;
     }
 }

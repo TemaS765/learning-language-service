@@ -2,20 +2,20 @@
 
 namespace App\Infrastructure\Entity;
 
-use App\Infrastructure\Repository\ExerciseRepository;
+use App\Infrastructure\Repository\ReminderExerciseRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ExerciseRepository::class)]
-#[ORM\Table(name: 'exercises')]
-class Exercise
+#[ORM\Entity(repositoryClass: ReminderExerciseRepository::class)]
+#[ORM\Table(name: 'reminder_exercises')]
+class ReminderExercise
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private int $id = 0;
 
-    #[ORM\Column(name: 'examination_id')]
-    private int $examinationId = 0;
+    #[ORM\Column(name: 'reminder_id')]
+    private int $reminderId = 0;
 
     #[ORM\Column(length: 255)]
     private string $question = '';
@@ -23,7 +23,7 @@ class Exercise
     #[ORM\Column(length: 255)]
     private string $answer = '';
 
-    #[ORM\Column(name:'correct_answer', length: 255)]
+    #[ORM\Column(name: 'correct_answer', length: 255)]
     private string $correctAnswer = '';
 
     #[ORM\Column(name: 'is_completed')]
@@ -44,14 +44,14 @@ class Exercise
         return $this;
     }
 
-    public function getExaminationId(): int
+    public function getReminderId(): int
     {
-        return $this->examinationId;
+        return $this->reminderId;
     }
 
-    public function setExaminationId(int $examinationId): static
+    public function setReminderId(int $reminderId): static
     {
-        $this->examinationId = $examinationId;
+        $this->reminderId = $reminderId;
 
         return $this;
     }

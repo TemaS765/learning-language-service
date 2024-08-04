@@ -10,6 +10,7 @@ doctrine:
         use_savepoints: true
         types:
             examination_type_enum: \App\Infrastructure\Doctrine\Type\ExaminationEnumType
+            reminder_channel_type_enum: \App\Infrastructure\Doctrine\Type\ReminderChannelTypeEnumType
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true

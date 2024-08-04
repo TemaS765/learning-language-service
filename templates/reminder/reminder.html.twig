@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+   <h1>Напоминание</h1>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message|raw }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+   {{ form(form) }}
+
+   <script>
+      document.addEventListener('DOMContentLoaded', function() {
+         const infoBlockId = 'channel-info',
+             channelTypesField = document.querySelector('select'),
+             handleSelectedChannelTypeFunc = function (el) {
+                document.querySelector('#' + infoBlockId)?.remove();
+                if (el.value === 'telegram') {
+                    el.parentElement.innerHTML += '<div id="' + infoBlockId + '">' +
+                        '<br/>' +
+                        '<div class="alert alert-info">' +
+                            'Для подключения перейдите по <a href="{{ TELEGRAM_BOT_URL }}" class="alert-link" target="_blank">ссылке</a>' +
+                        '</div>' +
+                    '</div>';
+                }
+             };
+         handleSelectedChannelTypeFunc(channelTypesField);
+         document.querySelector('select').addEventListener('change', function (event) {
+             handleSelectedChannelTypeFunc(event.target);
+         });
+      });
+   </script>
+
+{% endblock %}
