@@ -3,14 +3,6 @@
 {% block body %}
    <h1>{{ page_title }}</h1>
 
-   {% for label, messages in app.flashes %}
-      {% for message in messages %}
-         <div class="alert alert-{{ label }}">
-            {{ message|raw }}
-         </div>
-      {% endfor %}
-   {% endfor %}
-
    {{ form(form) }}
 
 {% endblock %}
