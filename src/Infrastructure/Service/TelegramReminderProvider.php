@@ -12,7 +12,7 @@ use Luzrain\TelegramBotApi\Exception\TelegramApiException;
 use Luzrain\TelegramBotApi\Method\SendMessage;
 use Psr\Http\Client\ClientExceptionInterface;
 
-class TelegramRemindProvider implements ReminderProviderInterface
+class TelegramReminderProvider implements ReminderProviderInterface
 {
     public function __construct(private BotApi $botApi)
     {

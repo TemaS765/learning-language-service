@@ -2,18 +2,21 @@
 
 {% block body %}
    <h1>Слова</h1>
-   <div class="list-group">
-      {% for word in words %}
-         <li class="list-group-item">
-            <div class="d-flex w-100 justify-content-between">
-               <h5 class="mb-1">{{ word.text|e }}</h5>
-               <div class="d-flex w-25 justify-content-between">
-                  <div class="w-50 text-end"><a class="btn" href="{{ path('edit_word', {id: word.id}) }}" title="Изменить"><i class="bi bi-pencil fs-3"></i></a></div>
-                  <div class="w-50 text-end"><a class="btn" href="" title="Удалить"><i class="bi bi-x-circle fs-3"></i></a></div>
+   <div class="container">
+      <div class="mb-3 d-flex flex-row-reverse"><a class="btn btn-primary p-3 text-uppercase" href="{{ url('add_word') }}">Добавить</a></div>
+      <div class="list-group">
+         {% for word in words %}
+            <li class="list-group-item">
+               <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">{{ word.text|e }}</h5>
+                  <div class="d-flex w-25 justify-content-between">
+                     <div class="w-50 text-end"><a class="btn" href="{{ path('edit_word', {id: word.id}) }}" title="Изменить"><i class="bi bi-pencil fs-3"></i></a></div>
+                     <div class="w-50 text-end"><a class="btn" href="{{ path('delete_word', {id: word.id}) }}" title="Удалить"><i class="bi bi-x-circle fs-3"></i></a></div>
+                  </div>
                </div>
-            </div>
-            <p class="mb-1">{{ word.translate|e }}</p>
-         </li>
-      {% endfor %}
+               <p class="mb-1">{{ word.translate|e }}</p>
+            </li>
+         {% endfor %}
+      </div>
    </div>
 {% endblock %}

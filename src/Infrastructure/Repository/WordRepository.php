@@ -93,6 +93,17 @@ class WordRepository extends ServiceEntityRepository implements WordRepositoryIn
         return $word;
     }
 
+    public function deleteWordById(Id $id): void
+    {
+        /** @var ORMEntity $entity */
+        $entity = $this->find($id->getValue());
+        if ($entity === null) {
+            throw new NotFoundException();
+        }
+        $this->getEntityManager()->remove($entity);
+        $this->getEntityManager()->flush();
+    }
+
     /**
      * @return Iterator<Word>
      */
