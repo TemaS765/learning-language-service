@@ -21,7 +21,10 @@ class ExecuteReminder extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        ($this->useCase)();
+        while (true) {
+            ($this->useCase)();
+            sleep(3);
+        }
         return Command::SUCCESS;
     }
 }

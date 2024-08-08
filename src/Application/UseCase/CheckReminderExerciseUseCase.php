@@ -22,7 +22,7 @@ readonly class CheckReminderExerciseUseCase
 
     public function __invoke(CheckReminderExerciseRequest $request): CheckReminderExerciseResponse
     {
-        $exercise = $this->exerciseRepository->getNotCompletedReminderExercises();
+        $exercise = $this->exerciseRepository->getNotCompletedReminderExercise();
         if (!$exercise) {
             throw new NotFoundException();
         }
@@ -36,7 +36,7 @@ readonly class CheckReminderExerciseUseCase
 
         $reminderUpdate = new UpdateReminder();
         $reminderUpdate->lastReminderAt = new \DateTime();
-        $this->reminderRepository->updateReminderById($exercise->getId(), $reminderUpdate);
+        $this->reminderRepository->updateReminderById($exercise->getReminderId(), $reminderUpdate);
 
         return new CheckReminderExerciseResponse($isCorrect);
     }

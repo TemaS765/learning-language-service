@@ -27,6 +27,7 @@ class ReminderExerciseRepository extends ServiceEntityRepository implements Remi
         $db->select('r')
             ->from(ORMEntity::class, 'r')
             ->where('r.reminderId = :reminderId')
+            ->andWhere('r.isCompleted = false')
             ->setParameter('reminderId', $reminderId)
             ->orderBy('r.id', 'DESC')
             ->setMaxResults(1);
@@ -73,7 +74,7 @@ class ReminderExerciseRepository extends ServiceEntityRepository implements Remi
         return $exercise;
     }
 
-    public function getNotCompletedReminderExercises(): ?ReminderExercise
+    public function getNotCompletedReminderExercise(): ?ReminderExercise
     {
         $db = $this->getEntityManager()->createQueryBuilder();
         $db->select('e')

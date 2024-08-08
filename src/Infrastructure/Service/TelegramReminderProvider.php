@@ -29,7 +29,7 @@ class TelegramReminderProvider implements ReminderProviderInterface
      */
     public function send(SendReminderRequest $request): void
     {
-        $text = "❕❕❕ Проверка ❕❕❕\n\n<strong>Привет</strong>     ➡️➡️➡️      ___________\n";
+        $text = "❕❕❕ Проверка ❕❕❕\n\n<strong>{$request->question}</strong>     ➡️➡️➡️      ___________\n";
         $method = new SendMessage(
             $request->channelId,
             $text,

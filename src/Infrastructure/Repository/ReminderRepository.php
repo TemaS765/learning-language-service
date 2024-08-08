@@ -93,6 +93,7 @@ class ReminderRepository extends ServiceEntityRepository implements ReminderRepo
 
         $entities = $db->getQuery()->getResult();
         foreach ($entities as $entity) {
+            $this->getEntityManager()->refresh($entity);
             yield $this->makeReminderByORMEntity($entity);
         }
     }
@@ -117,6 +118,10 @@ class ReminderRepository extends ServiceEntityRepository implements ReminderRepo
         $reflectionProperty = new \ReflectionProperty(Reminder::class, 'updatedAt');
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($reminder, $entity->getUpdatedAt());
+
+        $reflectionProperty = new \ReflectionProperty(Reminder::class, 'lastReminderAt');
+        $reflectionProperty->setAccessible(true);
+        $reflectionProperty->setValue($reminder, $entity->getLastReminderAt());
 
         return $reminder;
     }

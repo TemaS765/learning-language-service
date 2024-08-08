@@ -24,8 +24,8 @@ class WordForm extends AbstractType
                 [
                     'label' => 'Текст',
                     'constraints' => [
-                        new NotBlank(),
-                        new Regex('~^[\p{L}`]+$~u'),
+                        new NotBlank(null, 'Поле обязательно для заполнения'),
+                        new Regex('~^[\p{L}`]+$~u', 'Разрешены только буквы'),
                         new Length(['min' => 1, 'max' => 255])
                     ]
                 ]
@@ -36,8 +36,8 @@ class WordForm extends AbstractType
                 [
                     'label' => 'Перевод',
                     'constraints' => [
-                        new NotBlank(),
-                        new Regex('~^[\p{L}`]+$~u'),
+                        new NotBlank(null, 'Поле обязательно для заполнения'),
+                        new Regex('~^[\p{L}`]+$~u', 'Разрешены только буквы'),
                         new Length(['min' => 1, 'max' => 255])
                     ]
                 ]
