@@ -11,8 +11,6 @@ x-common: &app
   env_file: .env
   volumes:
     - .:/var/www/app
-  depends_on:
-    - postgres
   networks:
     - app_network
 
@@ -38,6 +36,8 @@ services:
       - "9000:9000"
     restart: always
     depends_on:
+      migrations:
+        condition: service_completed_successfully
       composer:
         condition: service_completed_successfully
 
@@ -46,6 +46,8 @@ services:
     container_name: ${APP_NAME}_telegram_pulling_worker
     command: [ "sh", "-c", "php bin/console telegram:polling:start" ]
     depends_on:
+      migrations:
+        condition: service_completed_successfully
       composer:
         condition: service_completed_successfully
 
@@ -53,6 +55,16 @@ services:
     <<: *app
     container_name: ${APP_NAME}_execute_reminder_worker
     command: [ "sh", "-c", "php bin/console app:reminder:execute" ]
+    depends_on:
+      migrations:
+        condition: service_completed_successfully
+      composer:
+        condition: service_completed_successfully
+
+  migrations:
+    <<: *app
+    container_name: ${APP_NAME}_migrations
+    command: [ "sh", "-c", "php bin/console doctrine:migration:migrate" ]
     depends_on:
       composer:
         condition: service_completed_successfully

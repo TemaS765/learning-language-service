@@ -36,7 +36,7 @@ class Reminder
     private DateTimeInterface $updatedAt;
 
     #[ORM\Column(name: 'last_reminder_at', type: 'datetime', nullable: true)]
-    private DateTimeInterface $lastReminderAt;
+    private ?DateTimeInterface $lastReminderAt;
 
     public function __construct()
     {
