@@ -33,7 +33,7 @@ class ExamForm extends AbstractType
                     'label' => 'Вопрос',
                     'constraints' => [
                         new NotBlank(),
-                        new Regex('~^[\p{L}`]+$~u'),
+                        new Regex('~^[\p{L}`]+$~u', 'Разрешены только буквы'),
                         new Length(['min' => 1, 'max' => 255])
                     ],
                     'attr' => $answerFieldAttr
@@ -46,7 +46,7 @@ class ExamForm extends AbstractType
                     'label' => 'Ответ',
                     'constraints' => [
                         new NotBlank(),
-                        new Regex('~^[\p{L}`]+$~u'),
+                        new Regex('~^[\p{L}`]+$~u', 'Разрешены только буквы'),
                         new Length(['min' => 1, 'max' => 255])
                     ],
                     'attr' => ['readonly' => $options['readonly_form']]
