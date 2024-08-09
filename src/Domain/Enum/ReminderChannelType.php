@@ -6,5 +6,4 @@ namespace App\Domain\Enum;
 
 enum ReminderChannelType: string {
     case TELEGRAM = 'telegram';
-    case EMAIL = 'email';
 }
