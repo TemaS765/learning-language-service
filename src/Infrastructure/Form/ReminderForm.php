@@ -54,7 +54,6 @@ class ReminderForm extends AbstractType
                     'class' => ReminderChannelType::class,
                     'choice_label' => static fn ($choice) => match ($choice) {
                         ReminderChannelType::TELEGRAM => 'Телеграм',
-                        ReminderChannelType::EMAIL => 'Электронная почта',
                     }
                 ]
             )
