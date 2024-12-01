@@ -26,6 +26,18 @@
             "migrations/.gitignore"
         ]
     },
+    "fluffydiscord/roadrunner-symfony-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "3.0",
+            "ref": "b7e7bc7c88c55680a0ea567a684b7d5f2ff753b8"
+        },
+        "files": [
+            "config/packages/fluffy_discord_road_runner.yaml"
+        ]
+    },
     "luzrain/telegram-bot-bundle": {
         "version": "v2.0.0"
     },

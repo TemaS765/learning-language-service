@@ -7,7 +7,7 @@ networks:
 x-common: &app
   build:
     context: .
-    dockerfile: ./docker/php/Dockerfile
+    dockerfile: ./docker/app/Dockerfile
   env_file: .env
   volumes:
     - .:/var/www/app
@@ -15,25 +15,12 @@ x-common: &app
     - app_network
 
 services:
-
-  nginx:
-    image: nginx:latest
-    container_name: ${APP_NAME}_nginx
-    ports:
-      - "${APP_PORT}:80"
-    volumes:
-      - .:/var/www/app
-      - ./docker/nginx/app.conf:/etc/nginx/conf.d/app.conf
-    networks:
-      - app_network
-    depends_on:
-      - php
-
-  php:
+  app:
     <<: *app
-    container_name: ${APP_NAME}_php
+    container_name: ${APP_NAME}_app
+    command: ["sh", "-c", "rr serve -c /var/www/app/docker/roadrunner/.rr.yaml -w /var/www/app"]
     ports:
-      - "9000:9000"
+      - "${APP_PORT}:${APP_PORT}"
     restart: always
     depends_on:
       migrations:
@@ -75,7 +62,7 @@ services:
     command: [ "sh", "-c", "composer install" ]
 
   postgres:
-    image: postgres:latest
+    image: postgres:17.2-alpine
     container_name: ${APP_NAME}_postgres
     ports:
       - "${DB_PORT}:5432"

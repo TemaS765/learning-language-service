@@ -7,4 +7,5 @@ return [
     Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true, 'test' => true],
     Symfony\Bundle\TwigBundle\TwigBundle::class => ['all' => true],
     Luzrain\TelegramBotBundle\TelegramBotBundle::class => ['all' => true],
+    FluffyDiscord\RoadRunnerBundle\FluffyDiscordRoadRunnerBundle::class => ['all' => true],
 ];
