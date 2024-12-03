@@ -18,7 +18,7 @@ readonly class ExecuteRemindersUseCase
         private ReminderRepositoryInterface $reminderRepository,
         private ReminderExerciseRepositoryInterface $reminderExerciseRepository,
         private WordRepositoryInterface $wordRepository,
-        private SendReminderUseCase $sendReminderUseCase,
+        private SendReminderUseCase $sendReminderUseCase
     ) {
     }
 

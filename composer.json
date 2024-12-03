@@ -26,6 +26,7 @@
         "symfony/yaml": "7.1.*"
     },
     "require-dev": {
+        "brainmaestro/composer-git-hooks": "^3.0",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "7.1.*",
         "symfony/css-selector": "7.1.*",
@@ -67,10 +68,12 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "vendor/bin/cghooks add --ignore-lock"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "vendor/bin/cghooks update"
         ]
     },
     "conflict": {
