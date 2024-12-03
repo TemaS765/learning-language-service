@@ -77,11 +77,6 @@
         "symfony/symfony": "*"
     },
     "extra": {
-        "hooks": {
-            "pre-commit": [
-                "php -d memory_limit=1G vendor/bin/php-cs-fixer fix --dry-run --diff"
-            ]
-        },
         "symfony": {
             "allow-contrib": false,
             "require": "7.1.*"
