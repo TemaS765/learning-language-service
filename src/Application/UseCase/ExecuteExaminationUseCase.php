@@ -22,7 +22,7 @@ readonly class ExecuteExaminationUseCase
     public function __construct(
         private ExaminationRepositoryInterface $examinationRepository,
         private ExerciseRepositoryInterface $exerciseRepository,
-        private WordRepositoryInterface $wordRepository,
+        private WordRepositoryInterface $wordRepository
     ) {
     }
 
