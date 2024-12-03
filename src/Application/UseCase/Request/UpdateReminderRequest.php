@@ -13,7 +13,7 @@ class UpdateReminderRequest
         public int $repeatPeriod,
         public ReminderChannelType $channelType,
         public string $channelId,
-        public bool $isActive
+        public bool $isActive,
     ) {
     }
 }

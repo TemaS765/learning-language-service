@@ -19,9 +19,9 @@ class ExamForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $answerFieldAttr = ['readonly' => true];
-        if ($options['validation_mode'] === 'valid') {
+        if ('valid' === $options['validation_mode']) {
             $answerFieldAttr['class'] = 'form-control is-valid';
-        } elseif ($options['validation_mode'] === 'invalid') {
+        } elseif ('invalid' === $options['validation_mode']) {
             $answerFieldAttr['class'] = 'form-control is-invalid';
         }
 
@@ -34,9 +34,9 @@ class ExamForm extends AbstractType
                     'constraints' => [
                         new NotBlank(),
                         new Regex('~^[\p{L}`]+$~u', 'Разрешены только буквы'),
-                        new Length(['min' => 1, 'max' => 255])
+                        new Length(['min' => 1, 'max' => 255]),
                     ],
-                    'attr' => $answerFieldAttr
+                    'attr' => $answerFieldAttr,
                 ]
             )
             ->add(
@@ -47,9 +47,9 @@ class ExamForm extends AbstractType
                     'constraints' => [
                         new NotBlank(),
                         new Regex('~^[\p{L}`]+$~u', 'Разрешены только буквы'),
-                        new Length(['min' => 1, 'max' => 255])
+                        new Length(['min' => 1, 'max' => 255]),
                     ],
-                    'attr' => ['readonly' => $options['readonly_form']]
+                    'attr' => ['readonly' => $options['readonly_form']],
                 ]
             )
             ->add(

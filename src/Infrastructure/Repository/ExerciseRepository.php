@@ -10,7 +10,6 @@ use App\Domain\Repository\Request\UpdateExerciseRequest;
 use App\Infrastructure\Entity\Exercise as ORMEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Iterator;
 
 /**
  * @extends ServiceEntityRepository<ORMEntity>
@@ -23,9 +22,7 @@ class ExerciseRepository extends ServiceEntityRepository implements ExerciseRepo
     }
 
     /**
-     * @param int $examinationId
      * @param Exercise[] $exercises
-     * @return void
      */
     public function addExercises(int $examinationId, array $exercises): void
     {
@@ -60,14 +57,14 @@ class ExerciseRepository extends ServiceEntityRepository implements ExerciseRepo
         if ($entity) {
             $exercise = $this->makeExerciseByOrmEntity($entity);
         }
+
         return $exercise;
     }
 
     /**
-     * @param int $examinationId
-     * @return Iterator<Exercise>
+     * @return \Iterator<Exercise>
      */
-    public function getExaminationExercises(int $examinationId): Iterator
+    public function getExaminationExercises(int $examinationId): \Iterator
     {
         $db = $this->getEntityManager()->createQueryBuilder();
         $db->select('e')
@@ -88,6 +85,7 @@ class ExerciseRepository extends ServiceEntityRepository implements ExerciseRepo
         if (!$entity) {
             throw new NotFoundException();
         }
+
         return $this->makeExerciseByOrmEntity($entity);
     }
 
@@ -123,6 +121,7 @@ class ExerciseRepository extends ServiceEntityRepository implements ExerciseRepo
         $reflectionProperty = new \ReflectionProperty(Exercise::class, 'id');
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($exercise, $entity->getId());
+
         return $exercise;
     }
 }

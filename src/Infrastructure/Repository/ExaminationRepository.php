@@ -7,7 +7,6 @@ use App\Domain\Enum\ExaminationType;
 use App\Domain\Exception\NotFoundException;
 use App\Domain\Repository\ExaminationRepositoryInterface;
 use App\Infrastructure\Entity\Examination as ORMEntity;
-use DateTimeInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -30,10 +29,10 @@ class ExaminationRepository extends ServiceEntityRepository implements Examinati
         $this->getEntityManager()->persist($entity);
         $this->getEntityManager()->flush();
 
-
         $reflectionProperty = new \ReflectionProperty(Examination::class, 'id');
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($examination, $entity->getId());
+
         return $examination;
     }
 
@@ -52,10 +51,11 @@ class ExaminationRepository extends ServiceEntityRepository implements Examinati
         if ($entity) {
             $examination = $this->makeExaminationByOrmEntity($entity);
         }
+
         return $examination;
     }
 
-    public function updateExaminationFinishedAt(int $examinationId, DateTimeInterface $dateTime): void
+    public function updateExaminationFinishedAt(int $examinationId, \DateTimeInterface $dateTime): void
     {
         $entity = $this->findOneBy(['id' => $examinationId]);
         if (!$entity) {
@@ -77,6 +77,7 @@ class ExaminationRepository extends ServiceEntityRepository implements Examinati
         $reflectionProperty = new \ReflectionProperty(Examination::class, 'id');
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($examination, $entity->getId());
+
         return $examination;
     }
 }

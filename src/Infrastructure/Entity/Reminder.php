@@ -4,8 +4,6 @@ namespace App\Infrastructure\Entity;
 
 use App\Domain\Enum\ReminderChannelType;
 use App\Infrastructure\Repository\ReminderRepository;
-use DateTime;
-use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReminderRepository::class)]
@@ -30,31 +28,31 @@ class Reminder
     private bool $isActive = false;
 
     #[ORM\Column(name: 'created_at', type: 'datetime')]
-    private DateTimeInterface $createdAt;
+    private \DateTimeInterface $createdAt;
 
     #[ORM\Column(name: 'updated_at', type: 'datetime', nullable: true)]
-    private DateTimeInterface $updatedAt;
+    private \DateTimeInterface $updatedAt;
 
     #[ORM\Column(name: 'last_reminder_at', type: 'datetime', nullable: true)]
-    private ?DateTimeInterface $lastReminderAt;
+    private ?\DateTimeInterface $lastReminderAt;
 
     public function __construct()
     {
-        $this->createdAt = new DateTime();
-        $this->updatedAt = new DateTime();
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     #[ORM\PrePersist]
     public function onPrePersist(): void
     {
-        $this->createdAt = new DateTime();
-        $this->updatedAt = new DateTime();
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     #[ORM\PreUpdate]
     public function onPreUpdate(): void
     {
-        $this->updatedAt = new DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -110,38 +108,38 @@ class Reminder
         return $this;
     }
 
-    public function getCreatedAt(): ?DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTimeInterface $createdAt): static
+    public function setCreatedAt(\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?DateTimeInterface $updatedAt): static
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
-    public function setLastReminderAt(?DateTimeInterface $lastReminderAt): static
+    public function setLastReminderAt(?\DateTimeInterface $lastReminderAt): static
     {
         $this->lastReminderAt = $lastReminderAt;
 
         return $this;
     }
 
-    public function getLastReminderAt(): ?DateTimeInterface
+    public function getLastReminderAt(): ?\DateTimeInterface
     {
         return $this->lastReminderAt;
     }

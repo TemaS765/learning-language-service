@@ -11,6 +11,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^3.2",
         "fluffydiscord/roadrunner-symfony-bundle": "^3.0",
+        "friendsofphp/php-cs-fixer": "^3.65",
         "luzrain/telegram-bot-bundle": "*",
         "nyholm/psr7": "*",
         "symfony/console": "7.1.*",

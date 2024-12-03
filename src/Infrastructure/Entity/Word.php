@@ -6,7 +6,7 @@ use App\Infrastructure\Repository\WordRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: WordRepository::class)]
-#[ORM\Table(name: "words")]
+#[ORM\Table(name: 'words')]
 class Word
 {
     #[ORM\Id]

@@ -10,7 +10,10 @@ use App\Domain\Repository\Request\UpdateReminderExerciseRequest;
 interface ReminderExerciseRepositoryInterface
 {
     public function findLastReminderNotCompletedExercise(int $reminderId): ?ReminderExercise;
+
     public function addReminderExercise(ReminderExercise $exercise): ReminderExercise;
+
     public function getNotCompletedReminderExercise(): ?ReminderExercise;
+
     public function updateReminderExercise(int $exerciseId, UpdateReminderExerciseRequest $request): void;
 }

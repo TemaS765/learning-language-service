@@ -40,4 +40,3 @@ class TelegramReminderProvider implements ReminderProviderInterface
         $this->botApi->call($method);
     }
 }
-

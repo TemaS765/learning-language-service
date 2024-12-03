@@ -7,7 +7,6 @@ namespace App\Application\UseCase;
 use App\Application\UseCase\Response\WordResponse;
 use App\Domain\Entity\Word;
 use App\Domain\Repository\WordRepositoryInterface;
-use Iterator;
 
 readonly class GetWordsUseCase
 {
@@ -16,9 +15,9 @@ readonly class GetWordsUseCase
     }
 
     /**
-     * @return Iterator<WordResponse>
+     * @return \Iterator<WordResponse>
      */
-    public function __invoke(): Iterator
+    public function __invoke(): \Iterator
     {
         /** @var Word $word */
         foreach ($this->wordRepository->getWords() as $word) {

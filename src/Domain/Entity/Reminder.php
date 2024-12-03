@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Domain\Entity;
 
 use App\Domain\Enum\ReminderChannelType;
-use DateTime;
-use DateTimeInterface;
 
 class Reminder
 {
@@ -15,22 +13,22 @@ class Reminder
     private ReminderChannelType $channelType;
     private string $channelId;
     private bool $isActive;
-    private DateTimeInterface $createdAt;
-    private DateTimeInterface $updatedAt;
-    private ?DateTimeInterface $lastReminderAt = null;
+    private \DateTimeInterface $createdAt;
+    private \DateTimeInterface $updatedAt;
+    private ?\DateTimeInterface $lastReminderAt = null;
 
     public function __construct(
         int $repeatPeriod,
         ReminderChannelType $channelType,
         string $channelId,
-        bool $isActive
+        bool $isActive,
     ) {
         $this->repeatPeriod = $repeatPeriod;
         $this->channelType = $channelType;
         $this->channelId = $channelId;
         $this->isActive = $isActive;
-        $this->createdAt = new DateTime();
-        $this->updatedAt = new DateTime();
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -58,17 +56,17 @@ class Reminder
         return $this->isActive;
     }
 
-    public function getCreatedAt(): DateTimeInterface
+    public function getCreatedAt(): \DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function getUpdatedAt(): DateTimeInterface
+    public function getUpdatedAt(): \DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function getLastReminderAt(): ?DateTimeInterface
+    public function getLastReminderAt(): ?\DateTimeInterface
     {
         return $this->lastReminderAt;
     }

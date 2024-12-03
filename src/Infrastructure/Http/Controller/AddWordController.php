@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class AddWordController extends AbstractController
 {
-    #[Route('/word/add', name: 'add_word', methods: ['POST','GET'])]
+    #[Route('/word/add', name: 'add_word', methods: ['POST', 'GET'])]
     public function add(Request $request, AddWordUseCase $useCase): Response
     {
         $form = $this->createForm(WordForm::class, null, ['button_label' => 'Добавить']);
@@ -22,8 +22,10 @@ class AddWordController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $useCase(new AddWordRequest($data['text'], $data['translate']));
+
             return $this->redirectToRoute('add_word');
         }
+
         return $this->render('word/add.html.twig', ['form' => $form]);
     }
 }

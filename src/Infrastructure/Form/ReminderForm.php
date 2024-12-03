@@ -28,7 +28,7 @@ class ReminderForm extends AbstractType
                 'id',
                 HiddenType::class,
                 [
-                    'required' => false
+                    'required' => false,
                 ]
             )
             ->add(
@@ -38,12 +38,12 @@ class ReminderForm extends AbstractType
                     'label' => 'Период повтора (в минутах)',
                     'constraints' => [
                         new NotBlank(),
-                        new Range(['min' => 0, 'max' => 10080])
+                        new Range(['min' => 0, 'max' => 10080]),
                     ],
                     'attr' => [
                         'min' => 0,
                         'max' => 10080,
-                    ]
+                    ],
                 ]
             )
             ->add(
@@ -53,8 +53,8 @@ class ReminderForm extends AbstractType
                     'label' => 'Канал оповещения',
                     'class' => ReminderChannelType::class,
                     'choice_label' => static fn ($choice) => match ($choice) {
-                        ReminderChannelType::TELEGRAM => 'Телеграм'
-                    }
+                        ReminderChannelType::TELEGRAM => 'Телеграм',
+                    },
                 ]
             )
             ->add(
@@ -63,10 +63,10 @@ class ReminderForm extends AbstractType
                 [
                     'label' => 'Идентификатор',
                     'constraints' => [
-                        new Length(['max' => 255])
+                        new Length(['max' => 255]),
                     ],
                     'empty_data' => '',
-                    'required' => false
+                    'required' => false,
                 ]
             )
             ->add(
@@ -74,7 +74,7 @@ class ReminderForm extends AbstractType
                 CheckboxType::class,
                 [
                     'label' => 'Активен',
-                    'required' => false
+                    'required' => false,
                 ]
             )
             ->add('save', SubmitType::class, ['label' => 'Сохранить']);

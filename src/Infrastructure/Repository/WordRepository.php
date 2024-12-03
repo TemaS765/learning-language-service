@@ -10,7 +10,6 @@ use App\Domain\Repository\WordRepositoryInterface;
 use App\Infrastructure\Entity\Word as ORMEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Iterator;
 
 /**
  * @extends ServiceEntityRepository<Word>type
@@ -36,7 +35,7 @@ class WordRepository extends ServiceEntityRepository implements WordRepositoryIn
     {
         /** @var ORMEntity $entity */
         $entity = $this->find($id->getValue());
-        if ($entity === null) {
+        if (null === $entity) {
             throw new NotFoundException();
         }
 
@@ -62,9 +61,9 @@ class WordRepository extends ServiceEntityRepository implements WordRepositoryIn
     }
 
     /**
-     * @return Iterator<Word>
+     * @return \Iterator<Word>
      */
-    public function getWords(): Iterator
+    public function getWords(): \Iterator
     {
         $entities = $this->findAll();
         $words = [];
@@ -76,6 +75,7 @@ class WordRepository extends ServiceEntityRepository implements WordRepositoryIn
             $reflectionProperty->setValue($word, new Id($entity->getId()));
             yield $word;
         }
+
         return $words;
     }
 
@@ -83,13 +83,14 @@ class WordRepository extends ServiceEntityRepository implements WordRepositoryIn
     {
         /** @var ORMEntity $entity */
         $entity = $this->find($id->getValue());
-        if ($entity === null) {
+        if (null === $entity) {
             throw new NotFoundException();
         }
         $word = new Word(new Text($entity->getText()), new Text($entity->getTranslate()));
         $reflectionProperty = new \ReflectionProperty(Word::class, 'id');
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($word, new Id($entity->getId()));
+
         return $word;
     }
 
@@ -97,7 +98,7 @@ class WordRepository extends ServiceEntityRepository implements WordRepositoryIn
     {
         /** @var ORMEntity $entity */
         $entity = $this->find($id->getValue());
-        if ($entity === null) {
+        if (null === $entity) {
             throw new NotFoundException();
         }
         $this->getEntityManager()->remove($entity);
@@ -105,9 +106,9 @@ class WordRepository extends ServiceEntityRepository implements WordRepositoryIn
     }
 
     /**
-     * @return Iterator<Word>
+     * @return \Iterator<Word>
      */
-    public function getWordsForExamination(int $limit): Iterator
+    public function getWordsForExamination(int $limit): \Iterator
     {
         $db = $this->getEntityManager()->createQueryBuilder();
         $db->select('w')

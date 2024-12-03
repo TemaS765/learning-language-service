@@ -51,7 +51,7 @@ class ExecuteExaminationController extends AbstractController
                     [
                         'button_label' => 'Далее',
                         'validation_mode' => $res->isCorrect ? 'valid' : 'invalid',
-                        'readonly_form' => true
+                        'readonly_form' => true,
                     ]
                 );
             } catch (NotFoundException $exception) {
@@ -96,7 +96,7 @@ class ExecuteExaminationController extends AbstractController
                     [
                         'button_label' => 'Далее',
                         'validation_mode' => $validationMode,
-                        'readonly_form' => true
+                        'readonly_form' => true,
                     ]
                 );
                 $message = $res->isCorrect

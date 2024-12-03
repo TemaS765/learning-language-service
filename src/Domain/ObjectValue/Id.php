@@ -7,6 +7,7 @@ namespace App\Domain\ObjectValue;
 class Id
 {
     private int $value;
+
     public function __construct(int $value)
     {
         $this->assertValue($value);

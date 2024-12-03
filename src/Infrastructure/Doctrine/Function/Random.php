@@ -11,7 +11,6 @@ use Doctrine\ORM\Query\TokenType;
 
 class Random extends FunctionNode
 {
-
     public function getSql(SqlWalker $sqlWalker): string
     {
         return 'RANDOM()';

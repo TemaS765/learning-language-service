@@ -25,6 +25,7 @@ class ExecuteReminder extends Command
             ($this->useCase)();
             sleep(3);
         }
+
         return Command::SUCCESS;
     }
 }

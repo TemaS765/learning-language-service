@@ -26,8 +26,8 @@ class WordForm extends AbstractType
                     'constraints' => [
                         new NotBlank(null, 'Поле обязательно для заполнения'),
                         new Regex('~^[\p{L}`]+$~u', 'Разрешены только буквы'),
-                        new Length(['min' => 1, 'max' => 255])
-                    ]
+                        new Length(['min' => 1, 'max' => 255]),
+                    ],
                 ]
             )
             ->add(
@@ -38,8 +38,8 @@ class WordForm extends AbstractType
                     'constraints' => [
                         new NotBlank(null, 'Поле обязательно для заполнения'),
                         new Regex('~^[\p{L}`]+$~u', 'Разрешены только буквы'),
-                        new Length(['min' => 1, 'max' => 255])
-                    ]
+                        new Length(['min' => 1, 'max' => 255]),
+                    ],
                 ]
             )
             ->add('add', SubmitType::class, ['label' => $options['button_label'] ?? 'Добавить']);
@@ -51,6 +51,4 @@ class WordForm extends AbstractType
             'button_label' => '',
         ]);
     }
-
-
 }

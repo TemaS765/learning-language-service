@@ -14,8 +14,8 @@ use App\Domain\Repository\Request\UpdateExerciseRequest;
 readonly class CheckExerciseUseCase
 {
     public function __construct(
-        private ExerciseRepositoryInterface $exerciseRepository
-    ){
+        private ExerciseRepositoryInterface $exerciseRepository,
+    ) {
     }
 
     public function __invoke(CheckExerciseRequest $request): CheckExerciseResponse
@@ -34,5 +34,4 @@ readonly class CheckExerciseUseCase
 
         return new CheckExerciseResponse($isCorrect, $exercise);
     }
-
 }

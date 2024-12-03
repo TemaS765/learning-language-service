@@ -11,7 +11,7 @@ class SendReminderRequest
     public function __construct(
         public ReminderChannelType $channelType,
         public string $channelId,
-        public string $question
+        public string $question,
     ) {
     }
 }

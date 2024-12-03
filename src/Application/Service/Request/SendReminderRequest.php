@@ -6,6 +6,7 @@ namespace App\Application\Service\Request;
 
 class SendReminderRequest
 {
-    public function __construct(public string $channelId, public string $question) {
+    public function __construct(public string $channelId, public string $question)
+    {
     }
 }

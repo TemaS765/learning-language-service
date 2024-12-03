@@ -19,8 +19,6 @@ class ExaminationEnumType extends Type
 
     /**
      * @param mixed|ExaminationType $value
-     * @param AbstractPlatform $platform
-     * @return string|null
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
@@ -29,8 +27,6 @@ class ExaminationEnumType extends Type
 
     /**
      * @param mixed|string $value
-     * @param AbstractPlatform $platform
-     * @return ExaminationType|null
      */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?ExaminationType
     {

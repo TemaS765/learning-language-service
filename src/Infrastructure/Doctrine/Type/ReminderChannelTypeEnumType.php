@@ -19,8 +19,6 @@ class ReminderChannelTypeEnumType extends Type
 
     /**
      * @param mixed|ReminderChannelType $value
-     * @param AbstractPlatform $platform
-     * @return string|null
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
@@ -29,8 +27,6 @@ class ReminderChannelTypeEnumType extends Type
 
     /**
      * @param mixed|string $value
-     * @param AbstractPlatform $platform
-     * @return ReminderChannelType|null
      */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?ReminderChannelType
     {

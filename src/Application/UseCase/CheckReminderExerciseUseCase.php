@@ -16,7 +16,7 @@ readonly class CheckReminderExerciseUseCase
 {
     public function __construct(
         private ReminderExerciseRepositoryInterface $exerciseRepository,
-        private ReminderRepositoryInterface $reminderRepository
+        private ReminderRepositoryInterface $reminderRepository,
     ) {
     }
 
@@ -40,5 +40,4 @@ readonly class CheckReminderExerciseUseCase
 
         return new CheckReminderExerciseResponse($isCorrect);
     }
-
 }

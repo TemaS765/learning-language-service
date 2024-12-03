@@ -23,7 +23,7 @@ class Exercise
     #[ORM\Column(length: 255)]
     private string $answer = '';
 
-    #[ORM\Column(name:'correct_answer', length: 255)]
+    #[ORM\Column(name: 'correct_answer', length: 255)]
     private string $correctAnswer = '';
 
     #[ORM\Column(name: 'is_completed')]

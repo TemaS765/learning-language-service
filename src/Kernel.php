@@ -22,7 +22,7 @@ class Kernel extends BaseKernel
 
     protected function build(ContainerBuilder $container): void
     {
-       $container->addCompilerPass(new CustomCompilerPass());
+        $container->addCompilerPass(new CustomCompilerPass());
     }
 
     private function registerCustomDBALTypes(): void

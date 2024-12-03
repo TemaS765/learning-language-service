@@ -11,7 +11,6 @@ use Luzrain\TelegramBotApi\Method;
 use Luzrain\TelegramBotApi\Type;
 use Luzrain\TelegramBotBundle\Attribute\OnCommand;
 use Luzrain\TelegramBotBundle\TelegramCommand;
-use Throwable;
 
 final class StartCommandController extends TelegramCommand
 {
@@ -26,8 +25,8 @@ final class StartCommandController extends TelegramCommand
         try {
             ($this->useCase)($request);
         } catch (NotFoundException $e) {
-           return $this->reply('Не удалось подключиться, так-как напоминание не создано');
-        } catch (Throwable $e) {
+            return $this->reply('Не удалось подключиться, так-как напоминание не создано');
+        } catch (\Throwable $e) {
             return $this->reply('Ну удалось подключиться');
         }
 

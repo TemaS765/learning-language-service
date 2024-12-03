@@ -14,16 +14,16 @@ use App\Domain\ObjectValue\Text;
 use App\Domain\Repository\ExaminationRepositoryInterface;
 use App\Domain\Repository\ExerciseRepositoryInterface;
 use App\Domain\Repository\WordRepositoryInterface;
-use DateTime;
 
 readonly class ExecuteExaminationUseCase
 {
-    const MAX_NUMBER_OF_WORDS_FOR_EXAMINATION = 50;
+    private const MAX_NUMBER_OF_WORDS_FOR_EXAMINATION = 50;
+
     public function __construct(
         private ExaminationRepositoryInterface $examinationRepository,
         private ExerciseRepositoryInterface $exerciseRepository,
-        private WordRepositoryInterface $wordRepository
-    ){
+        private WordRepositoryInterface $wordRepository,
+    ) {
     }
 
     public function __invoke(ExecuteExaminationRequest $request): ExecuteExaminationResponse
@@ -36,7 +36,7 @@ readonly class ExecuteExaminationUseCase
 
         $exercise = $this->exerciseRepository->findNextExaminationExercise($examination->getId());
         if (!$exercise) {
-            $this->examinationRepository->updateExaminationFinishedAt($examination->getId(), new DateTime());
+            $this->examinationRepository->updateExaminationFinishedAt($examination->getId(), new \DateTime());
             throw new NotFoundException();
         }
 
@@ -47,7 +47,7 @@ readonly class ExecuteExaminationUseCase
     {
         $addExamination = new Examination(
             $request->examinationType,
-            new DateTime()
+            new \DateTime()
         );
         $examination = $this->examinationRepository->addExamination($addExamination);
         $exercises = [];

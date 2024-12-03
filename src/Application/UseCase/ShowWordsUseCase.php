@@ -17,6 +17,7 @@ readonly class ShowWordsUseCase
     public function __invoke(int $id): WordResponse
     {
         $word = $this->wordRepository->getWordById(new Id($id));
+
         return new WordResponse(
             $word->getId()->getValue(),
             $word->getText()->getValue(),

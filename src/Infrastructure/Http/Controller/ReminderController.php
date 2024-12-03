@@ -29,6 +29,7 @@ class ReminderController extends AbstractController
         $formModel->setIsActive($reminder->isActive);
 
         $form = $this->createForm(ReminderForm::class, $formModel);
+
         return $this->render('reminder/reminder.html.twig', ['form' => $form]);
     }
 
@@ -51,9 +52,11 @@ class ReminderController extends AbstractController
                 $useCase($request);
             } catch (NotFoundException $exception) {
                 $this->addFlash('notice', 'Не найдено напоминание');
+
                 return $this->redirectToRoute('/');
             }
             $this->addFlash('success', 'Информация обновлена');
+
             return $this->redirectToRoute('show_reminder');
         }
 

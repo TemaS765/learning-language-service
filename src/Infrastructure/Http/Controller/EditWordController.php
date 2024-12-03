@@ -26,9 +26,11 @@ class EditWordController extends AbstractController
                 $useCase(new EditWordRequest($id, $data['text'], $data['translate']));
             } catch (NotFoundException $exception) {
                 $this->addFlash('notice', 'Не найдено слово');
+
                 return $this->redirectToRoute('/');
             }
             $this->addFlash('success', 'Информация обновлена');
+
             return $this->redirectToRoute('show_word', ['id' => $id]);
         }
 

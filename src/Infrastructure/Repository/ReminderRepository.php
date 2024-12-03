@@ -7,10 +7,8 @@ use App\Domain\Exception\NotFoundException;
 use App\Domain\Repository\ReminderRepositoryInterface;
 use App\Domain\Repository\Request\UpdateReminder;
 use App\Infrastructure\Entity\Reminder as ORMEntity;
-use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Iterator;
 
 /**
  * @extends ServiceEntityRepository<ORMEntity>
@@ -33,7 +31,6 @@ class ReminderRepository extends ServiceEntityRepository implements ReminderRepo
         $entity->setUpdatedAt($reminder->getUpdatedAt());
         $this->getEntityManager()->persist($entity);
         $this->getEntityManager()->flush();
-
 
         $reflectionProperty = new \ReflectionProperty(Reminder::class, 'id');
         $reflectionProperty->setAccessible(true);
@@ -76,14 +73,14 @@ class ReminderRepository extends ServiceEntityRepository implements ReminderRepo
             $entity->setLastReminderAt($request->lastReminderAt);
         }
 
-        $entity->setUpdatedAt(new DateTime());
+        $entity->setUpdatedAt(new \DateTime());
 
         $this->getEntityManager()->persist($entity);
         $this->getEntityManager()->flush();
     }
 
-    /** @return Iterator<Reminder> */
-    public function getAllActiveReminders(): Iterator
+    /** @return \Iterator<Reminder> */
+    public function getAllActiveReminders(): \Iterator
     {
         $db = $this->getEntityManager()->createQueryBuilder();
         $db->select('r')

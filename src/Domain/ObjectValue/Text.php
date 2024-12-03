@@ -7,6 +7,7 @@ namespace App\Domain\ObjectValue;
 class Text
 {
     private string $value;
+
     public function __construct(string $value)
     {
         $this->assertValue($value);

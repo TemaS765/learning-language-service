@@ -14,15 +14,17 @@ use Symfony\Component\Routing\Attribute\Route;
 class DeleteWordController extends AbstractController
 {
     #[Route('/word/{id}/delete', name: 'delete_word', methods: ['GET'])]
-    public function edit(int $id,  DeleteWordUseCase $useCase): Response
+    public function edit(int $id, DeleteWordUseCase $useCase): Response
     {
         try {
             $useCase(new DeleteWordRequest($id));
         } catch (NotFoundException $exception) {
             $this->addFlash('notice', 'Не найдено слово');
+
             return $this->redirectToRoute('/');
         }
         $this->addFlash('success', 'Слово удалено');
+
         return $this->redirectToRoute('get_words');
     }
 }

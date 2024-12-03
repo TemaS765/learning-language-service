@@ -11,7 +11,7 @@ class WordRepositoryTest extends KernelTestCase
         $kernel = self::bootKernel();
 
         print_r($_ENV);
-        exit();
+        exit;
 
         $this->assertSame('test', $kernel->getEnvironment());
         // $routerService = static::getContainer()->get('router');

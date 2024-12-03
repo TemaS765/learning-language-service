@@ -11,7 +11,6 @@ use App\Domain\Entity\Word;
 use App\Domain\Repository\ReminderExerciseRepositoryInterface;
 use App\Domain\Repository\ReminderRepositoryInterface;
 use App\Domain\Repository\WordRepositoryInterface;
-use DateTime;
 
 readonly class ExecuteRemindersUseCase
 {
@@ -19,13 +18,13 @@ readonly class ExecuteRemindersUseCase
         private ReminderRepositoryInterface $reminderRepository,
         private ReminderExerciseRepositoryInterface $reminderExerciseRepository,
         private WordRepositoryInterface $wordRepository,
-        private SendReminderUseCase $sendReminderUseCase
+        private SendReminderUseCase $sendReminderUseCase,
     ) {
     }
 
     public function __invoke(): void
     {
-        $dateTime = new DateTime();
+        $dateTime = new \DateTime();
         /** @var Reminder $reminder */
         foreach ($this->reminderRepository->getAllActiveReminders() as $reminder) {
             if (

@@ -5,9 +5,8 @@ namespace App\Infrastructure\Repository;
 use App\Domain\Entity\ReminderExercise;
 use App\Domain\Exception\NotFoundException;
 use App\Domain\Repository\ReminderExerciseRepositoryInterface;
-use App\Domain\Repository\Request\UpdateExerciseRequest;
 use App\Domain\Repository\Request\UpdateReminderExerciseRequest;
-use App\Infrastructure\Entity\ReminderExercise AS ORMEntity;
+use App\Infrastructure\Entity\ReminderExercise as ORMEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

@@ -5,16 +5,15 @@ declare(strict_types=1);
 namespace App\Domain\Entity;
 
 use App\Domain\Enum\ExaminationType;
-use DateTimeInterface;
 
 class Examination
 {
     private ?int $id;
     private ExaminationType $type;
-    private DateTimeInterface $startedAt;
-    private ?DateTimeInterface $finishedAt = null;
+    private \DateTimeInterface $startedAt;
+    private ?\DateTimeInterface $finishedAt = null;
 
-    public function __construct(ExaminationType $type, DateTimeInterface $startedAt)
+    public function __construct(ExaminationType $type, \DateTimeInterface $startedAt)
     {
         $this->type = $type;
         $this->startedAt = $startedAt;
@@ -30,17 +29,17 @@ class Examination
         return $this->type;
     }
 
-    public function getStartedAt(): DateTimeInterface
+    public function getStartedAt(): \DateTimeInterface
     {
         return $this->startedAt;
     }
 
-    public function getFinishedAt(): ?DateTimeInterface
+    public function getFinishedAt(): ?\DateTimeInterface
     {
         return $this->finishedAt;
     }
 
-    public function setFinishedAt(?DateTimeInterface $finishedAt): void
+    public function setFinishedAt(?\DateTimeInterface $finishedAt): void
     {
         $this->finishedAt = $finishedAt;
     }

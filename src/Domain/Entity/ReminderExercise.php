@@ -7,15 +7,15 @@ namespace App\Domain\Entity;
 class ReminderExercise
 {
     private ?int $id;
+
     public function __construct(
         private int $reminderId,
         private string $question,
         private string $answer,
         private string $correctAnswer,
         private bool $isCompleted,
-        private bool $isRight
-    )
-    {
+        private bool $isRight,
+    ) {
     }
 
     public function getId(): ?int

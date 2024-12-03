@@ -4,13 +4,12 @@ namespace App\Infrastructure\Entity;
 
 use App\Domain\Enum\ExaminationType;
 use App\Infrastructure\Repository\ExaminationRepository;
-use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ExaminationRepository::class)]
-#[ORM\Table(name: "examinations")]
+#[ORM\Table(name: 'examinations')]
 class Examination
 {
     #[ORM\Id]
@@ -22,10 +21,10 @@ class Examination
     private ExaminationType $type;
 
     #[ORM\Column(name: 'started_at', type: 'datetime', nullable: true)]
-    private ?DateTimeInterface $startedAt = null;
+    private ?\DateTimeInterface $startedAt = null;
 
     #[ORM\Column(name: 'finished_at', type: 'datetime', nullable: true)]
-    private ?DateTimeInterface $finishedAt = null;
+    private ?\DateTimeInterface $finishedAt = null;
 
     #[ORM\OneToMany(targetEntity: Exercise::class, mappedBy: 'examination_plans')]
     private Collection $exercises;
@@ -57,28 +56,31 @@ class Examination
     public function setType(ExaminationType $type): static
     {
         $this->type = $type;
+
         return $this;
     }
 
-    public function getStartedAt(): ?DateTimeInterface
+    public function getStartedAt(): ?\DateTimeInterface
     {
         return $this->startedAt;
     }
 
-    public function setStartedAt(DateTimeInterface $startedAt): static
+    public function setStartedAt(\DateTimeInterface $startedAt): static
     {
         $this->startedAt = $startedAt;
+
         return $this;
     }
 
-    public function getFinishedAt(): ?DateTimeInterface
+    public function getFinishedAt(): ?\DateTimeInterface
     {
         return $this->finishedAt;
     }
 
-    public function setFinishedAt(DateTimeInterface $finishedAt): static
+    public function setFinishedAt(\DateTimeInterface $finishedAt): static
     {
         $this->finishedAt = $finishedAt;
+
         return $this;
     }
 }

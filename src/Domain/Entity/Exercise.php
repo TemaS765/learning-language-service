@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity;
 
-use App\Domain\Enum\ExaminationType;
 use App\Domain\ObjectValue\Text;
-use DateTimeInterface;
 
 class Exercise
 {
@@ -22,7 +20,7 @@ class Exercise
         Text $answer,
         Text $correctAnswer,
         bool $isCompleted,
-        bool $isRight
+        bool $isRight,
     ) {
         $this->question = $question;
         $this->answer = $answer;

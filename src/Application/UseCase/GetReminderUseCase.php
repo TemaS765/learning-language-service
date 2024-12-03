@@ -29,12 +29,13 @@ readonly class GetReminderUseCase
             );
             $reminder = $this->reminderRepository->findReminder();
         }
+
         return new GetReminderResponse(
             $reminder->getId(),
             $reminder->getRepeatPeriod(),
             $reminder->getChannelType(),
             $reminder->getChannelId(),
             $reminder->isActive()
-        );;
+        );
     }
 }

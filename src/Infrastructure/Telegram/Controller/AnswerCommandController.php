@@ -11,7 +11,6 @@ use Luzrain\TelegramBotApi\Method;
 use Luzrain\TelegramBotApi\Type;
 use Luzrain\TelegramBotBundle\Attribute\OnCommand;
 use Luzrain\TelegramBotBundle\TelegramCommand;
-use Throwable;
 
 final class AnswerCommandController extends TelegramCommand
 {
@@ -24,7 +23,7 @@ final class AnswerCommandController extends TelegramCommand
     {
         $answer = explode(' ', $message->text, 2)[1] ?? '';
         if (empty($answer)) {
-            return $this->reply("Передано пустое значение");
+            return $this->reply('Передано пустое значение');
         }
 
         $request = new CheckReminderExerciseRequest($answer);
@@ -32,13 +31,13 @@ final class AnswerCommandController extends TelegramCommand
         try {
             $response = ($this->useCase)($request);
         } catch (NotFoundException $e) {
-           return $this->reply('Не удалось подключиться, так-как напоминание не создано');
-        } catch (Throwable $e) {
+            return $this->reply('Не удалось подключиться, так-как напоминание не создано');
+        } catch (\Throwable $e) {
             return $this->reply('Ну удалось подключиться');
         }
 
         return $this->reply(
-            "Ответ --- <strong>" . ($response->isCorrect ? "Верный" : "Неверный") . "</strong>",
+            'Ответ --- <strong>' . ($response->isCorrect ? 'Верный' : 'Неверный') . '</strong>',
             'HTML'
         );
     }
